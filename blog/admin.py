@@ -9,4 +9,5 @@ class PostModelAdmin(admin.ModelAdmin):
     list_display = ('title','counted_view','status','publish_date')
     list_filter = ('status',)
     search_fields = ['title','content']
+    #ordering = ['create_date']
 admin.site.register(PostModel,PostModelAdmin)
