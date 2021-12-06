@@ -7,11 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    {{PostModel}}
-    {%for PostModel in PostModel%}
-    <h2>{{PostModel.title}}</h2>
-    <p>{{PostModel.content}}</p>
-    <small>{{PostModel.publish_date}}</small>
-    {%endfor%}
+    <p>{{post.title}}</p>
+    
 </body>
 </html>
