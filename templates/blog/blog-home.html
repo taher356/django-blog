@@ -91,7 +91,10 @@
 							<div class="single-post row">
 								<div class="col-lg-3  col-md-3 meta-details">
 									<ul class="tags">
-										{{ PostModel.category.all|join:"," }}
+										{% for cat in PostModel.category.all %}
+										<a href="#">{{cat.name}}</a>{% if not forloop.last %},{% endif %}
+										{% endfor %}
+
 										
 										
 													
@@ -99,7 +102,7 @@
 									</ul>
 									<div class="user-details row">
 										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{PostModel.author}}</a></p> <span class="lnr lnr-user"></span></p>
-										<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{PostModel.publish_date}}</a> <span class="lnr lnr-calendar-full"></span></p>
+										<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{PostModel.publish_date|date:"D d M Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
 										<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{PostModel.counted_view}} view</a> <span class="lnr lnr-eye"></span></p>
 										<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p>						
 									</div>
@@ -110,7 +113,8 @@
 									</div>
 									<a class="posts-title" href="{% url 'blog:single' pid=PostModel.id  %}"><h3>{{PostModel.title}}</h3></a>
 									<p class="excert">
-										{{PostModel.content}}
+										<!--{{PostModel.snipets}}-->
+										{{PostModel.content|truncatechars:119}}
 									</p>
 									<a href="blog-single.html" class="primary-btn">View More</a>
 								</div>

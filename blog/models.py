@@ -28,5 +28,8 @@ class PostModel(models.Model):
     
     def __str__(self):
         return "{}-{}".format(self.title,self.id)
+
+    def snipets(self):
+        return self.content[:99] +'...'    
     
     
