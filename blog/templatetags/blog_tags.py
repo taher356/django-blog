@@ -14,3 +14,12 @@ def function():
 def function():
     posts = PostModel.objects.filter(status=1)
     return posts
+
+@register.filter()
+def snippet(value):
+    return value[:20] +  '...'
+
+@register.inclusion_tag('popularposts.html')
+def popularposts():
+    posts = PostModel.objects.filter(status=1).order_by('publish_date')[:2] 
+    return  {'posts': posts}  
