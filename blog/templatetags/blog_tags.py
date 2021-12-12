@@ -19,7 +19,7 @@ def function():
 def snippet(value):
     return value[:20] +  '...'
 
-@register.inclusion_tag('popularposts.html')
+@register.inclusion_tag('blog/blog-popular-posts.html')
 def popularposts():
-    posts = PostModel.objects.filter(status=1).order_by('publish_date')[:2] 
+    posts = PostModel.objects.filter(status=1).order_by('publish_date')[:3] 
     return  {'posts': posts}  
