@@ -20,3 +20,9 @@ def blog_single(request,pid):
 def test(request,):
     return render(request,'test.html')    
 
+def blog_search(request):
+    posts = PostModel.objects.filter(status=1)
+    if request.method=='GET':
+        posts = PostModel.objects.filter(content__contains=request.GET.get('s'))
+    context = {'PostModel':posts}
+    return render(request,'blog/blog-home.html',context)
