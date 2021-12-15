@@ -1,12 +1,13 @@
 from django.shortcuts import render,get_object_or_404
 from blog.models import PostModel
 # Create your views here.
-def blog_view(request,cat_name=None,author_username=None):
+def blog_view(request,**kwargs):
+   
     posts = PostModel.objects.filter(status=1)
-    if cat_name:
-        posts = PostModel.objects.filter(category__name=cat_name)
-    if author_username:
-        posts = PostModel.objects.filter(author__username=author_name)
+    if kwargs.get('cat_name')!=None :
+        posts = PostModel.objects.filter(category__name=kwargs['cat_name'])
+    if kwargs.get('author_username')!=None :
+        posts = PostModel.objects.filter(author__username=kwargs['author_username'])
     context = {'PostModel':posts}
     return render(request,'blog/blog-home.html',context)
 
@@ -17,11 +18,5 @@ def blog_single(request,pid):
     return render(request,'blog/blog-single.html',context)
 
 def test(request,):
-   
     return render(request,'test.html')    
 
-def blog_category(request,cat_name):
-    posts = PostModel.objects.filter(status=1)
-    posts = PostModel.objects.filter(category__name=cat_name)
-    context = {'PostModel':posts}
-    return render(request,'blog/blog-home.html',context)
