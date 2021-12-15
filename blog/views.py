@@ -15,3 +15,9 @@ def blog_single(request,pid):
 def test(request,):
    
     return render(request,'test.html')    
+
+def blog_category(request,cat_name):
+    posts = PostModel.objects.filter(status=1)
+    posts = PostModel.objects.filter(category__name=cat_name)
+    context = {'PostModel':posts}
+    return render(request,'blog/blog-home.html',context)
